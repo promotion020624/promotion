@@ -95,23 +95,23 @@ DATABASES = {
     #    'NAME': BASE_DIR / 'db.sqlite3',
     #}
 
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'promotion',
-        'USER' : 'customer',
-        'PASSWORD' : 'customer',
-        'HOST' : '127.0.0.1',
-        'PORT' : '5432',
-    }
-    
     #'default': {
-	   # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-	   # 'NAME': 'promotion_7gix',
-	   # 'USER' : 'promotion_admin',
-	   # 'PASSWORD' : 'iim7An34Ko6ZBGjaLmJ0Qlfe8SdbahPI',
-	   # 'HOST' : 'dpg-colrtlgl5elc73bojg10-a.frankfurt-postgres.render.com',
-	   # 'PORT' : '5432',
+    #    'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #    'NAME': 'promotion',
+    #    'USER' : 'customer',
+    #    'PASSWORD' : 'customer',
+    #    'HOST' : '127.0.0.1',
+    #    'PORT' : '5432',
     #}
+    
+    'default': {
+	    'ENGINE': 'django.db.backends.postgresql_psycopg2',
+	    'NAME': 'promotion_wzay',
+	    'USER' : 'promotion_admin',
+	    'PASSWORD' : 'IZeKIIu2AVGhc1K8NpNPB9sZcDyjufES',
+	    'HOST' : 'dpg-cpetvn5ds78s73fn95pg-a.frankfurt-postgres.render.com',
+	    'PORT' : '5432',
+    }
 
 }
 

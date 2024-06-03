@@ -41,6 +41,7 @@ urlpatterns = [
     path('category/read/<int:id>/', views.category_read, name='category_read'),
     
     path('service/index/', views.service_index, name='service_index'),
+    path('service/list/', views.service_list, name='service_list'),
     path('service/create/', views.service_create, name='service_create'),
     path('service/edit/<int:id>/', views.service_edit, name='service_edit'),
     path('service/delete/<int:id>/', views.service_delete, name='service_delete'),

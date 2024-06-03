@@ -198,6 +198,15 @@ def service_index(request):
         print(exception)
         return HttpResponse(exception)
 
+# Список для просмотра
+def service_list(request):
+    try:
+        service = Service.objects.all().order_by('service_title')
+        return render(request, "service/list.html", {"service": service,})
+    except Exception as exception:
+        print(exception)
+        return HttpResponse(exception)
+
 # В функции create() получаем данные из запроса типа POST, сохраняем данные с помощью метода save()
 # и выполняем переадресацию на корень веб-сайта (то есть на функцию index).
 @login_required

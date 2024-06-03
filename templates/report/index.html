@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% block title %}{% trans "Reports" %}{% endblock title %}
+{% block header %}{% endblock header %}
+{% block content %}
+<h2>{% trans "Reports" %}</h2>
+<form method="POST" enctype="multipart/form-data">
+	{% csrf_token %}
+	<div style="margin-top:10px">
+		<p>
+			{% trans "Date range" %}:		
+			<input type="date" value="{{start_date}}" name ="start_date" id ="start_date">
+			<input type="date" value="{{finish_date}}" name = "finish_date" id ="finish_date">
+			<button class="btn btn-outline-success" name="searchBtn" style="width:120px; margin:5px">{% trans "Go" %}</button>
+			<button class="btn btn-outline-primary" name="resetBtn" type="submit" onClick="window.location.reload();" style="width:120px; margin:5px">{% trans "Reset" %}</button>
+		</p>
+	</div>
+</form>
+{% if application.count > 0 %}
+<table id="myTable" class="table-manager" style="width:100%">
+	<thead>
+		<tr>
+			<th><p>{% trans "datea" %}</p></th>
+			<th><p>{% trans "user" %}</p></th>
+			<th><p>{% trans "application_title" %}</p></th>
+			<th><p>{% trans "total" %}</p></th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for n in application %}
+		<tr>
+			<td>
+				<p>{{ n.datea | date:"d.m.Y H:i"}}</p>	
+			</td>
+			<td>
+				<p>{{ n.username }} ({{ n.email }})</p>	
+				<p>{{ n.first_name }} {{ n.last_name }}</p>			
+			</td>
+			<td>
+				<p>{{ n.application_title }}</p>	
+				<p>
+					{% if n.final != None %}
+						{{ n.final }}
+					{% endif %}
+				</p>	
+			</td>
+			<td>
+				<p>
+					{% if n.total != None %}
+						{{ n.total }}
+					{% endif %}
+				</p>		
+			</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% endif %}
+
+{% endblock content %}

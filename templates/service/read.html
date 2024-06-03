@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "View" %}{% endblock title %}
+{% block content %}
+<h2>{% trans "service" %}</h2>
+<div class="row justify-content-center">
+	<div class="card" style="width:100%">
+		<div class="card-header">
+			<h5>{{ service.category }}</h5>			
+			<h4>{{ service.service_title }}</h4>			
+		</div>
+		<div class="card-body">
+			<div class="row">
+				<div class="col-md-8">				
+					<p>{{ service.details | linebreaks }}</p>					
+				</div>
+				<div class="col-md-4">
+					{% if service.photo.url != None %}
+						<img style="width:100%; max-width:400px;" src="{{ service.photo.url}}" alt="{{ service.photo.url }}">
+					{% endif %}
+				</div>
+			</div>				
+		</div>
+		<div class="card-footer">				
+			<p><strong>{% trans "price" %}: </strong>{{ service.price }}</p>		
+		</div>		
+	</div>
+	<a class="btn btn-outline-info" style="width:120px; margin: 2px;" onclick="history.back()">{% trans "Back" %}</a>    	
+</div>
+{% endblock content %}

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "sale" %}{% endblock title %}
+{% block header %}{% endblock header %}
+{% block content %}
+<h2>{% trans "application" %}</h2>
+<h4>{{ app.datea | date:"d.m.Y H:i" }}</h4>
+<h4>{{ app.username  }} ({{ app.email }})</h4>
+<h4>{{ app.first_name }} {{ app.last_name }}</h4>
+<h5>{{ app.application_title  }}</h5>
+<p>{{ app.application_details  }}</p>
+<p><strong>{% trans "total" %}</strong>: {{ app.total  }}</h4>
+<h2>{% trans "sale" %}</h2>
+<p><a href="{% url 'sale_create' application_id %}">{% trans "Add" %}</a></p>
+<hr>
+{% if sale.count > 0 %}
+<table id="myTable" class="table-manager" style="width:100%">
+	<thead>
+		<tr>
+			<th><p>{% trans "dates" %}</p></th>
+			<th><p>{% trans "service" %}</p></th>
+			<th><p>{% trans "payment" %}</p></th>
+			<th><p></p></th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for p in sale %}
+		<tr>
+			<td>
+				<p>{{ p.dates | date:"d.m.Y H:i"}}</p>
+			</td>
+			<td>
+				<p>{{ p.service }}</p>
+			</td>
+			<td>
+				<p>{{ p.payment }}</p>
+			</td>
+			<td>
+				<p>
+					<a href="{% url 'sale_edit' p.id application_id %}">{% trans "Change" %}</a> 
+					<a href="{% url 'sale_read' p.id application_id %}">{% trans "View" %}</a> 
+					<a onclick="return confirm('Удалить запись?')" href="{% url 'sale_delete' p.id application_id %}">{% trans "Delete" %}</a>
+				</p>
+			</td>						
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% endif %}
+<div class="row justify-content-center">
+	<a class="btn btn-outline-info" style="width:120px"  href="{% url 'application_index' %}">{% trans "Back" %}</a>
+</div>
+{% endblock content %}
+

@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Read" %}{% endblock title %}
+{% block content %}
+<h2>{% trans "application" %}</h2>
+<div class="row justify-content-center">
+	<div class="card" style="width:100%">
+		<div class="card-header">	
+			<h4>{{ application.username }} ({{ application.email }})</h4>			
+			<h5>{{ application.first_name }} {{ application.last_name }}</h5>			
+		</div>
+		<div class="card-body">
+			<p>{{ application.datea  | date:"d.m.Y H:i:s" }}</p>	
+			<p><strong>{% trans "application_title" %}</strong>: {{ application.application_title }}</p>			
+			<p>{{ application.application_details }}</p>			
+			<p>
+				<strong>{% trans "total" %}</strong>:
+					{% if application.total != None %}
+						{{ application.total }}
+					{% endif %}
+			</p>			
+			<p>
+				{% if application.final != None %}
+					{{ application.final }}
+				{% endif %}
+			</p>			
+		</div>
+		<div class="card-footer">
+			<h4>{% trans "sales" %}</h4>
+			{% if sale.count > 0 %}
+				<table class="cell-border hover stripe" style="width:100%">
+					<thead>	
+						<tr>
+							<th><p>{% trans "dates" %}</p></th>
+							<th><p>{% trans "service" %}</p></th>
+							<th><p>{% trans "payment" %}</p></th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for p in sale %}
+						<tr>
+							<td>
+								<p>{{ p.dates | date:"d.m.Y H:i:s"}}</p>
+							</td>
+							<td>
+								<p>{{ p.service }}</p>
+							</td>	
+							<td>
+								<p>{{ p.payment }}</p>
+							</td>							
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			{% endif %}		
+			<h4>{% trans "movement" %}</h4>
+			{% if movement.count > 0 %}
+				<table class="cell-border hover stripe" style="width:100%">
+					<thead>	
+						<tr>
+							<th><p>{% trans "datem" %}</p></th>
+							<th><p>{% trans "status" %}</p></th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for p in movement %}
+						<tr>
+							<td>
+								<p>{{ p.datem | date:"d.m.Y H:i:s"}}</p>
+							</td>
+							<td>
+								<p>{{ p.status }}</p>
+							</td>							
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			{% endif %}			
+		</div>	
+	</div>			
+	<div class="row justify-content-center">
+		<a class="btn btn-outline-info" style="width:120px" onclick="history.back();">{% trans "Back" %}</a>    	
+	</div>
+</div>
+{% endblock content %}

@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "applications" %}{% endblock title %}
+{% block header %}{% endblock header %}
+{% block content %}
+<h2>{% trans "applications" %}</h2>
+<!-- <p><a href="{% url 'application_create'%}">{% trans "Add" %}</a></p> -->
+<!-- ы<hr> -->
+{% if application.count > 0 %}
+<table id="myTable" class="table-manager" style="width:100%">
+	<thead>
+		<tr>
+			<th><p>{% trans "datea" %}</p></th>
+			<th><p>{% trans "user" %}</p></th>
+			<th><p>{% trans "application_title" %}</p></th>
+			<th><p>{% trans "total" %}</p></th>
+			<th><p></p></th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for n in application %}
+		<tr>
+			<td>
+				<p>{{ n.datea | date:"d.m.Y H:i"}}</p>	
+			</td>
+			<td>
+				<p>{{ n.username }} ({{ n.email }})</p>	
+				<p>{{ n.first_name }} {{ n.last_name }}</p>			
+			</td>
+			<td>
+				<p>{{ n.application_title }}</p>	
+				<p>
+					{% if n.final != None %}
+						{{ n.final }}
+					{% endif %}
+				</p>	
+				<p><a href="{% url 'sale_index' n.id%}">{% trans "sales" %}</a></p>	
+				<p><a href="{% url 'movement_index' n.id%}">{% trans "movements" %}</a></p>	
+			</td>
+			<td>
+				<p>
+					{% if n.total != None %}
+						{{ n.total }}
+					{% endif %}
+				</p>		
+			</td>
+			<td>
+				<p>
+					<!--<a href="{% url 'application_edit' n.id %}">{% trans "Change" %}</a> -->
+					<a style="width:120px; margin: 2px;"  href="{% url 'application_read' n.id %}">{% trans "View" %}</a> 
+					<a style="width:120px; margin: 2px;" onclick="return confirm('Удалить запись?')" href="{% url 'application_delete' n.id %}">{% trans "Delete" %}</a>
+				</p>
+					
+			</td>				
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% endif %}
+{% endblock content %}
+

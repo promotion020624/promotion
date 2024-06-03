@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "applications" %}{% endblock title %}
+{% block header %}{% endblock header %}
+{% block content %}
+<div class="div-width-100-text-center">
+	<h3>{% trans "applications" %}</h3>
+</div>
+<h4>{{first_name}} {{last_name}}</h4>
+<h5>{{email}}</h5>
+<p><a  href="{% url 'application_create'%}">{% trans "Add" %}</a></p>
+<hr>
+{% if application.count > 0 %}
+<div class="row">
+	<table id="myTable" class="table-manager" style="width:100%">
+		<thead>
+			<tr>
+				<th><p>{% trans "datea" %}</p></th>
+				<th><p>{% trans "user" %}</p></th>
+				<th><p>{% trans "application_title" %}</p></th>
+				<th><p>{% trans "total" %}</p></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for n in application %}
+			<tr>
+				<td>
+					<p>{{ n.datea | date:"d.m.Y H:i"}}</p>	
+				</td>
+				<td>
+					<p>{{ n.username }} ({{ n.email }})</p>	
+					<p>{{ n.first_name }} {{ n.last_name }}</p>			
+				</td>
+				<td>
+					<p>{{ n.application_title }}</p>	
+					<p>
+						{% if n.final != None %}
+							{{ n.final }}
+						{% endif %}
+					</p>	
+					<a href="{% url 'application_read' n.id %}">{% trans "View" %}</a> 									
+				</td>				
+				<td>
+					<p>
+						{% if n.total != None %}
+							{{ n.total }}
+						{% endif %}
+					</p>	
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+{% endif %}
+{% endblock content %}
+

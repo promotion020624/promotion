@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Create" %}{% endblock title %}
+{% block header %}{% endblock header %}
+{% block content %}
+<h2>{% trans "application" %}</h2>
+<h4>{{ app.datea | date:"d.m.Y H:i" }}</h4>
+<h4>{{ app.username  }} ({{ app.email }})</h4>
+<h4>{{ app.first_name }} {{ app.last_name }}</h4>
+<h5>{{ app.application_title  }}</h5>
+<p><strong>{% trans "total" %}</strong>: {{ app.total  }}</h4>
+<h2>{% trans "movement" %}</h2>
+<form method="POST" enctype="multipart/form-data">
+	{% csrf_token %}
+    <table>
+        {{ form }}
+    </table>
+	<div class="div-button-center">
+		<button type="submit" class="btn btn-outline-success" style="width:120px">{% trans "Save" %}</button>	
+		<button onclick="location.href='{% url 'movement_index' application_id %}'" class="btn btn-outline-info" style="width:120px">{% trans "Back" %}</button>	
+	</div>
+</form>
+<script type="text/javascript">
+	$(".chosen").chosen();
+</script>
+{% endblock content %}
